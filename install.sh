@@ -29,9 +29,10 @@ echo "  3) Moonshot Kimi       (长上下文)"
 echo "  4) 智谱 GLM-4.7        (国产大模型)"
 echo "  5) 阿里 Qwen           (通义千问)"
 echo "  6) OpenRouter           (一个 key 用所有模型)"
-echo "  7) 自定义 OpenAI 兼容   (任意 base_url)"
+echo "  7) CLIProxyAPI 网关     (自建 Codex/Claude OAuth 代理)"
+echo "  8) 自定义 OpenAI 兼容   (任意 base_url)"
 echo ""
-read -p "选择 (1-7): " CHOICE
+read -p "选择 (1-8): " CHOICE
 
 case $CHOICE in
     1)
@@ -101,6 +102,24 @@ case $CHOICE in
         KEY_HINT="sk-or-v1-..."
         ;;
     7)
+        PROVIDER="cliproxyapi"
+        DISPLAY_PREFIX="Codex Gateway"
+        DEFAULT_URL=""
+        DRIVER="openai"
+        MODELS='[
+            {"id":"cgw-gpt-5.4","name":"GPT-5.4","max":32000},
+            {"id":"cgw-gpt-5.4-mini","name":"GPT-5.4 Mini","max":32000},
+            {"id":"cgw-gpt-5.3-codex","name":"GPT-5.3 Codex","max":32000},
+            {"id":"cgw-gpt-5.3-codex-spark","name":"GPT-5.3 Spark","max":32000},
+            {"id":"cgw-gpt-5.2","name":"GPT-5.2","max":32000}
+        ]'
+        KEY_HINT="your-gateway-api-key"
+        echo ""
+        echo "  CLIProxyAPI 是自建的 OAuth 代理网关，把 Codex/Claude 订阅变成 API。"
+        echo "  你需要提供你的网关域名和 API Key。"
+        echo "  参考: https://github.com/router-for-me/CLIProxyAPI"
+        ;;
+    8)
         PROVIDER="custom"
         DISPLAY_PREFIX=""
         DEFAULT_URL=""
@@ -116,7 +135,7 @@ esac
 
 echo ""
 
-if [ "$CHOICE" = "7" ]; then
+if [ "$CHOICE" = "8" ]; then
     read -p "显示名称前缀 (如 MyProxy): " DISPLAY_PREFIX
     read -p "Base URL (如 https://api.example.com/v1): " DEFAULT_URL
     read -p "Provider (anthropic / openai / generic-chat-completion-api): " DRIVER
