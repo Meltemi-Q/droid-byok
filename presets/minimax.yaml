@@ -1,0 +1,49 @@
+# MiniMax M2.7 - 国产推理模型
+# 验证状态: 端到端验证通过
+# 验证日期: 2026-04-14
+
+name: MiniMax
+homepage: https://platform.minimaxi.com
+key_format: "sk-cp-..."
+key_source: "platform.minimaxi.com > API Keys (Coding Plan / Token Plan)"
+
+notes: |
+  - Token Plan (Coding Plan) 使用 sk-cp- 前缀的 key, 不是 sk-api-
+  - sk-api- 是通用 MaaS PAYG key, 和 Token Plan 是完全独立的计费体系
+  - M2.7 是推理模型, 不可关闭 <think> 输出
+  - 使用 anthropic provider 时 droid 自动折叠思考过程
+  - -highspeed 变体仅支持 PAYG key, Token Plan 不可用
+  - Token Plan 按调用次数计费 (如 4500次/5h), 不按 token 数
+
+docs:
+  zh: https://platform.minimaxi.com/docs/token-plan/minimax-skills
+  en: https://platform.minimax.io/docs
+
+regions:
+  cn:
+    base_url: https://api.minimaxi.com/anthropic
+  global:
+    base_url: https://api.minimax.io/anthropic
+
+# anthropic provider: droid 自动折叠 thinking block
+# generic-chat-completion-api: <think> 标签会泄漏到聊天里
+provider: anthropic
+
+verified:
+  status: "pass"
+  date: "2026-04-14"
+  tested_by: "meltemi"
+  method: "curl + droid exec + mmx-cli"
+
+models:
+  - id: MiniMax-M2.7
+    display: "MiniMax M2.7"
+    context: 196608
+    max_tokens: 131072
+    reasoning: true
+    default: true
+  - id: MiniMax-M2
+    display: "MiniMax M2"
+    context: 200000
+    max_tokens: 65536
+    reasoning: true

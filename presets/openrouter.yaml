@@ -1,0 +1,53 @@
+# OpenRouter - 模型聚合网关 (catch-all)
+# 验证状态: 文档来源, 未端到端验证
+
+name: OpenRouter
+homepage: https://openrouter.ai
+key_format: "sk-or-v1-..."
+key_source: "openrouter.ai > Keys"
+
+notes: |
+  - 一个 key 访问数百个模型 (Claude / GPT / Gemini / Llama / Mistral / DeepSeek / 国产模型等)
+  - OpenAI 兼容接口
+  - 按 token 计费, 价格透明
+  - 支持 streaming, function calling
+  - model id 格式: provider/model-name (如 anthropic/claude-sonnet-4)
+  - 适合想用一个 key 试遍所有模型的用户
+
+docs:
+  en: https://openrouter.ai/docs
+
+regions:
+  global:
+    base_url: https://openrouter.ai/api/v1
+
+provider: generic-chat-completion-api
+
+verified:
+  status: "unverified"
+  date: null
+  tested_by: null
+  method: "doc-sourced"
+
+models:
+  - id: anthropic/claude-sonnet-4
+    display: "Claude Sonnet 4 (via OR)"
+    context: 200000
+    max_tokens: 16384
+    reasoning: false
+    default: true
+  - id: openai/gpt-5.4
+    display: "GPT-5.4 (via OR)"
+    context: 128000
+    max_tokens: 32000
+    reasoning: true
+  - id: deepseek/deepseek-r1
+    display: "DeepSeek R1 (via OR)"
+    context: 64000
+    max_tokens: 8192
+    reasoning: true
+  - id: google/gemini-2.5-pro
+    display: "Gemini 2.5 Pro (via OR)"
+    context: 1000000
+    max_tokens: 65536
+    reasoning: true

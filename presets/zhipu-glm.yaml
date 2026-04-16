@@ -1,0 +1,50 @@
+# 智谱 GLM - 国产大模型
+# 验证状态: 文档来源, 未端到端验证
+# 参考: https://docs.bigmodel.cn/cn/coding-plan/tool/droid
+
+name: Zhipu GLM
+homepage: https://open.bigmodel.cn
+key_format: "..."
+key_source: "open.bigmodel.cn > API 密钥"
+
+notes: |
+  - 智谱官方文档明确提供了 droid BYOK 配置教程
+  - 推荐使用 anthropic provider (官方文档推荐)
+  - GLM-4.7 支持推理模式
+  - 也可使用 OpenAI 兼容接口 (/v1)
+
+docs:
+  zh: https://docs.bigmodel.cn/cn/coding-plan/tool/droid
+  en: https://docs.bigmodel.cn/en/coding-plan/tool/droid
+
+regions:
+  cn_anthropic:
+    base_url: https://open.bigmodel.cn/api/anthropic
+  cn_openai:
+    base_url: https://open.bigmodel.cn/api/paas/v4
+
+provider: anthropic
+
+verified:
+  status: "unverified"
+  date: null
+  tested_by: null
+  method: "doc-sourced (official droid integration guide)"
+
+models:
+  - id: glm-4.7
+    display: "GLM-4.7"
+    context: 128000
+    max_tokens: 16384
+    reasoning: true
+    default: true
+  - id: glm-4.6
+    display: "GLM-4.6"
+    context: 128000
+    max_tokens: 16384
+    reasoning: true
+  - id: glm-4-plus
+    display: "GLM-4 Plus"
+    context: 128000
+    max_tokens: 4096
+    reasoning: false

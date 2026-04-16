@@ -1,0 +1,43 @@
+# DeepSeek - 国产推理模型
+# 验证状态: 文档来源, 未端到端验证
+
+name: DeepSeek
+homepage: https://platform.deepseek.com
+key_format: "sk-..."
+key_source: "platform.deepseek.com > API Keys"
+
+notes: |
+  - DeepSeek-R1 是推理模型, 会输出 <think> 标签
+  - DeepSeek-V3 是非推理模型, 无 <think> 输出
+  - 使用 generic-chat-completion-api provider (OpenAI 兼容接口)
+  - DeepSeek 官方不提供 Anthropic 兼容接口
+  - 支持 Function Calling
+
+docs:
+  zh: https://platform.deepseek.com/api-docs
+  en: https://api-docs.deepseek.com
+
+regions:
+  global:
+    base_url: https://api.deepseek.com/v1
+
+provider: generic-chat-completion-api
+
+verified:
+  status: "unverified"
+  date: null
+  tested_by: null
+  method: "doc-sourced"
+
+models:
+  - id: deepseek-reasoner
+    display: "DeepSeek R1"
+    context: 64000
+    max_tokens: 8192
+    reasoning: true
+    default: true
+  - id: deepseek-chat
+    display: "DeepSeek V3"
+    context: 64000
+    max_tokens: 8192
+    reasoning: false

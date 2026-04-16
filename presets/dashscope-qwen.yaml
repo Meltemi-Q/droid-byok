@@ -1,0 +1,52 @@
+# 阿里 Qwen (通义千问) - 通过 DashScope 接入
+# 验证状态: 文档来源, 未端到端验证
+
+name: Alibaba Qwen (DashScope)
+homepage: https://dashscope.console.aliyun.com
+key_format: "sk-..."
+key_source: "dashscope.console.aliyun.com > API-KEY 管理"
+
+notes: |
+  - DashScope 提供 OpenAI 兼容接口
+  - Qwen3 支持推理模式, Qwen2.5 不支持
+  - 免费额度较多, 适合测试
+  - 也支持通过 Anthropic 兼容接口接入 (需确认)
+
+docs:
+  zh: https://help.aliyun.com/zh/model-studio/developer-reference/compatibility-of-openai-with-dashscope
+  en: https://help.aliyun.com/en/model-studio/developer-reference/compatibility-of-openai-with-dashscope
+
+regions:
+  cn:
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+provider: generic-chat-completion-api
+
+verified:
+  status: "unverified"
+  date: null
+  tested_by: null
+  method: "doc-sourced"
+
+models:
+  - id: qwen3-235b-a22b
+    display: "Qwen3 235B"
+    context: 131072
+    max_tokens: 8192
+    reasoning: true
+    default: true
+  - id: qwen3-32b
+    display: "Qwen3 32B"
+    context: 131072
+    max_tokens: 8192
+    reasoning: true
+  - id: qwen-plus-latest
+    display: "Qwen Plus"
+    context: 131072
+    max_tokens: 8192
+    reasoning: false
+  - id: qwen-turbo-latest
+    display: "Qwen Turbo"
+    context: 131072
+    max_tokens: 8192
+    reasoning: false

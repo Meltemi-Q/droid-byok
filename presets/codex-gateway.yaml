@@ -1,0 +1,80 @@
+# Codex Gateway - 自建 OpenAI 代理网关
+# 验证状态: 端到端验证通过
+# 验证日期: 2026-04-15
+
+name: Codex Gateway
+homepage: ""
+key_format: "sk-cgw-..."
+key_source: "自建 Codex Gateway 管理面板"
+
+notes: |
+  - 自托管的 OpenAI API 兼容代理网关
+  - 支持 GPT-5 系列全线模型 (5 / 5.1 / 5.2 / 5.3 / 5.4 / Codex 变体)
+  - 延迟主要由上游 OpenAI 推理时间决定, 网关本身增加的延迟 <1ms
+  - 有内置 prompt caching (测试中观察到 cached_tokens)
+  - base_url 需要替换为你自己的网关域名
+
+docs: {}
+
+regions:
+  self_hosted:
+    base_url: "https://your-gateway.example.com/v1"
+
+provider: generic-chat-completion-api
+
+verified:
+  status: "pass"
+  date: "2026-04-15"
+  tested_by: "meltemi"
+  method: "curl + droid exec"
+
+models:
+  - id: gpt-5.4
+    display: "GPT-5.4"
+    max_tokens: 32000
+    reasoning: true
+    default: true
+  - id: gpt-5.4-codex
+    display: "GPT-5.4 Codex"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.3-codex
+    display: "GPT-5.3 Codex"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.2
+    display: "GPT-5.2"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.2-codex
+    display: "GPT-5.2 Codex"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.1
+    display: "GPT-5.1"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.1-codex
+    display: "GPT-5.1 Codex"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5.1-codex-max
+    display: "GPT-5.1 Codex Max"
+    max_tokens: 65536
+    reasoning: true
+  - id: gpt-5.1-codex-mini
+    display: "GPT-5.1 Codex Mini"
+    max_tokens: 16384
+    reasoning: false
+  - id: gpt-5
+    display: "GPT-5"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5-codex
+    display: "GPT-5 Codex"
+    max_tokens: 32000
+    reasoning: true
+  - id: gpt-5-codex-mini
+    display: "GPT-5 Codex Mini"
+    max_tokens: 16384
+    reasoning: false

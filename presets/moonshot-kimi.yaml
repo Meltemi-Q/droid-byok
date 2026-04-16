@@ -1,0 +1,47 @@
+# Moonshot (Kimi) - 长上下文模型
+# 验证状态: 文档来源, 未端到端验证
+
+name: Moonshot (Kimi)
+homepage: https://platform.moonshot.cn
+key_format: "sk-..."
+key_source: "platform.moonshot.cn > API 管理"
+
+notes: |
+  - Kimi 以长上下文能力著称 (最高 128K)
+  - OpenAI 兼容接口
+  - 不是推理模型, 无 <think> 输出
+  - 价格较低, 适合大上下文任务
+
+docs:
+  zh: https://platform.moonshot.cn/docs
+  en: https://platform.moonshot.cn/docs
+
+regions:
+  cn:
+    base_url: https://api.moonshot.cn/v1
+
+provider: generic-chat-completion-api
+
+verified:
+  status: "unverified"
+  date: null
+  tested_by: null
+  method: "doc-sourced"
+
+models:
+  - id: moonshot-v1-128k
+    display: "Kimi 128K"
+    context: 128000
+    max_tokens: 8192
+    reasoning: false
+    default: true
+  - id: moonshot-v1-32k
+    display: "Kimi 32K"
+    context: 32000
+    max_tokens: 8192
+    reasoning: false
+  - id: moonshot-v1-8k
+    display: "Kimi 8K"
+    context: 8000
+    max_tokens: 8192
+    reasoning: false

@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""
+droid-byok: Factory Droid CLI 的 BYOK 模型预设管理工具
+
+用法:
+  droid-byok list                           列出所有预设
+  droid-byok show <preset>                  查看预设详情
+  droid-byok install <preset> [--region X]  安装预设到 ~/.factory/config.json
+  droid-byok uninstall <preset>             从 config.json 移除
+  droid-byok validate                       校验所有预设文件
+  droid-byok probe [--all | <preset>]       探测 endpoint 可达性
+"""
+
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, SCRIPT_DIR)
+
+from install import main as install_main
+from validate import main as validate_main
+from probe import main as probe_main
+
+def print_usage():
+    print(__doc__.strip())
+
+def main():
+    if len(sys.argv) < 2:
+        print_usage()
+        sys.exit(1)
+
+    cmd = sys.argv[1]
+
+    if cmd == 'list':
+        from install import list_presets
+        list_presets()
+    elif cmd == 'show':
+        if len(sys.argv) < 3:
+            print("用法: droid-byok show <preset_name>")
+            sys.exit(1)
+        from install import show_preset
+        show_preset(sys.argv[2])
+    elif cmd == 'install':
+        if len(sys.argv) < 3:
+            print("用法: droid-byok install <preset_name> [--region cn|global]")
+            sys.exit(1)
+        region = None
+        if '--region' in sys.argv:
+            idx = sys.argv.index('--region')
+            region = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else None
+        install_main(sys.argv[2], region=region)
+    elif cmd == 'uninstall':
+        if len(sys.argv) < 3:
+            print("用法: droid-byok uninstall <preset_name>")
+            sys.exit(1)
+        from install import uninstall_preset
+        uninstall_preset(sys.argv[2])
+    elif cmd == 'validate':
+        validate_main()
+    elif cmd == 'probe':
+        target = sys.argv[2] if len(sys.argv) > 2 else '--all'
+        probe_main(target)
+    elif cmd in ('--help', '-h', 'help'):
+        print_usage()
+    else:
+        print(f"未知命令: {cmd}")
+        print_usage()
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()
