@@ -32,7 +32,7 @@ echo "  6) OpenRouter           (一个 key 用所有模型)"
 echo "  7) CLIProxyAPI 网关     (自建 Codex/Claude OAuth 代理)"
 echo "  8) 自定义 OpenAI 兼容   (任意 base_url)"
 echo ""
-read -p "选择 (1-8): " CHOICE
+read -p "选择 (1-8): " CHOICE < /dev/tty
 
 case $CHOICE in
     1)
@@ -136,20 +136,20 @@ esac
 echo ""
 
 if [ "$CHOICE" = "8" ]; then
-    read -p "显示名称前缀 (如 MyProxy): " DISPLAY_PREFIX
-    read -p "Base URL (如 https://api.example.com/v1): " DEFAULT_URL
-    read -p "Provider (anthropic / openai / generic-chat-completion-api): " DRIVER
-    read -p "模型 ID: " MODEL_ID
-    read -p "模型显示名: " MODEL_NAME
-    read -p "max_tokens (默认 32000): " MAX_TOK
+    read -p "显示名称前缀 (如 MyProxy): " DISPLAY_PREFIX < /dev/tty
+    read -p "Base URL (如 https://api.example.com/v1): " DEFAULT_URL < /dev/tty
+    read -p "Provider (anthropic / openai / generic-chat-completion-api): " DRIVER < /dev/tty
+    read -p "模型 ID: " MODEL_ID < /dev/tty
+    read -p "模型显示名: " MODEL_NAME < /dev/tty
+    read -p "max_tokens (默认 32000): " MAX_TOK < /dev/tty
     MAX_TOK="${MAX_TOK:-32000}"
     MODELS="[{\"id\":\"$MODEL_ID\",\"name\":\"$MODEL_NAME\",\"max\":$MAX_TOK}]"
 fi
 
-read -p "Base URL (回车用默认 $DEFAULT_URL): " INPUT_URL
+read -p "Base URL (回车用默认 $DEFAULT_URL): " INPUT_URL < /dev/tty
 BASE_URL="${INPUT_URL:-$DEFAULT_URL}"
 
-read -p "API Key ($KEY_HINT): " API_KEY
+read -p "API Key ($KEY_HINT): " API_KEY < /dev/tty
 if [ -z "$API_KEY" ]; then
     echo "[ERROR] API Key 不能为空"
     exit 1
